@@ -44,10 +44,15 @@ public class CircuitBreakerTest {
                 supplierQueue.add(() -> "Hello");
                 supplierQueue.add(() -> "Hello");
                 supplierQueue.add(() -> "Hello");
+                supplierQueue.add(() -> {
+                    throw new RuntimeException();
+                });
                 supplierQueue.add(() -> "Hello");
                 supplierQueue.add(() -> "Hello");
                 supplierQueue.add(() -> "Hello");
-                supplierQueue.add(() -> "Hello");
+                supplierQueue.add(() -> {
+                    throw new RuntimeException();
+                });
             }
 
             public String process() {
@@ -77,7 +82,7 @@ public class CircuitBreakerTest {
             CircuitBreaker.decorateSupplier(announce, server::process);
 
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 21; i++) {
             invoke(String.valueOf(i), stringSupplier);
             displayStatus(String.valueOf(i), announce);
             try {
