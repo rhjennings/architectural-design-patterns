@@ -10,7 +10,7 @@ import com.tngtech.archunit.lang.ArchRule;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
 public class HexArchTest {
-    @DisplayName("domain should not depend on adapter package")
+    @DisplayName("domain package should not depend on adapter package")
     @Test
     void domainMustNotDependOnAdapter() {
         JavaClasses importedClasses = 
